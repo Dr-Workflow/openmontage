@@ -1,0 +1,15 @@
+# HeyJoe Film Maker — Backlot storyboard server (port 3004 -> 4750)
+# Deploy via Hostinger Docker Manager -> Compose with THIS REPO URL.
+services:
+  filmmaker:
+    build:
+      context: .
+      dockerfile: deploy/Dockerfile
+    container_name: heyjoe-filmmaker
+    restart: unless-stopped
+    ports:
+      - "3004:4750"
+    volumes:
+      - filmmaker_projects:/app/projects
+volumes:
+  filmmaker_projects:
