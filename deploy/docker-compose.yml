@@ -1,4 +1,6 @@
 # HeyJoe Filmmaker — Backlot storyboard server (port 3004 -> 4750)
+# Projects dir is a HOST bind mount so productions created on the VPS
+# (e.g. by pipeline tools or the simulator) appear in the embedded UI.
 services:
   filmmaker:
     build:
@@ -9,6 +11,4 @@ services:
     ports:
       - "3004:4750"
     volumes:
-      - filmmaker_projects:/app/projects
-volumes:
-  filmmaker_projects:
+      - /data/OpenMontage/projects:/app/projects

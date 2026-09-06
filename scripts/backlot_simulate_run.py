@@ -94,6 +94,14 @@ def main() -> int:
     brief["topic"] = "The Last Lighthouse"
     cp("research", "completed", {"research_brief": brief})
 
+    # proposal gates too (pipeline order: research -> proposal -> script)
+    proposal_packet = sample_artifact("proposal_packet")
+    cp("proposal", "in_progress", {})
+    save_artifact("proposal_packet", proposal_packet)
+    cp("proposal", "awaiting_human", {"proposal_packet": proposal_packet})
+    time.sleep(wait)
+    cp("proposal", "completed", {"proposal_packet": proposal_packet}, human_approved=True)
+
     # script gates: awaiting_human -> approved
     cp("script", "in_progress", {})
     save_artifact("script", art["script"])
